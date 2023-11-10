@@ -4,18 +4,20 @@
     pdo_execute($sql);
   }
   function delete_sanpham($id){
-    $sql = "delete from sanpham where id_sp".$id;
+    $sql = "delete from sanpham where id_sp=".$id;
     pdo_query($sql);
   }
-  function load_sp($kyw = "" , $id_danhmuc = 0){
-     $sql = "select * from sanpham where 1";
+  function load_sp($kyw = "", $id_danhmuc = 0){
+     $sql = "select * from sanpham where 1 ";
      if($kyw!= ""){
         $sql .= " and name_sp like '%".$kyw."%'";
      }
      if($id_danhmuc > 0){
         $sql .= " and id_danhmuc = '".$id_danhmuc."'";
      }
+     $sql .= " order by id_sp desc";
+     $listsp = pdo_query($sql);
+     return $listsp;
   }
-
 
 ?>
